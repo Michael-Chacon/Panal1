@@ -46,9 +46,9 @@ class Login
 		
 		$sql = "SELECT *  FROM  usuario WHERE nombre = '$Nombre_us'";
 		$validate =  $this->db->query($sql);
-		var_dump($validate);
-		exit();
 
+			var_dump($validate->fetch_object());
+			exit();
 		if ($validate && $validate->num_rows == 1) {
 			$datos =  $validate->fetch_object();
 			if ($datos->pass == $contrasena) {
