@@ -9,7 +9,7 @@ class Login
 
 	public function __construct()
 	{
-		$this->db = Database::conexion();
+		$this->db = Database::conectar();
 	}
 
 	// metodos get
@@ -44,13 +44,10 @@ class Login
 		$Nombre_us  =  $this->getUsuairo();
 		$contrasena =  $this->getPassword();
 		
-		$sql = "SELECT *  FROM  usuario WHERE nombre = '$Nombre_us'";
-		$validate =  $this->db->query($sql);
-		var_dump($validate);
-		exit();
-
-		if ($validate && $validate->num_rows == 1) {
-			$datos =  $validate->fetch_object();
+		$validate = $this->db->prepare("SELECT *  FROM  usuario WHERE nombre = ?");
+		$validate->execute(array($Nombre_us));
+		if ($validate && $validate->rowCount() == 1) {
+			$datos =  $validate->fetchObject();
 			if ($datos->pass == $contrasena) {
 				return $datos;
 			}else{
