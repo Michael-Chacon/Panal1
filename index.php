@@ -7,7 +7,7 @@ require_once 'helpers/constantes.php';
 require_once 'helpers/util.php';
 require_once 'view/layout/header.php';
 
-$db = Database::conexion();
+$db = new 	Database();
 
 
 function show_error()

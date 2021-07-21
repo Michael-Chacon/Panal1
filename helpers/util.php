@@ -7,6 +7,15 @@ class Utiles
 			unset($_SESSION[$error]);
 		}
 	}
+
+public static function is_user()
+{
+	if (!isset($_SESSION['user'])) {
+		header("Location:" . base_url);
+	}
 }
+
+
+}//FIN DE LA CLASE
 
  ?>
