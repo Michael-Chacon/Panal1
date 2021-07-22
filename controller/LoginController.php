@@ -10,6 +10,29 @@ class LoginController
 		require_once 'view/login/login.php';
 	}
 
+	#registrar nuevos usuarios en el 
+	public function new_user()
+	{
+		if (isset($_POST) && !empty($_POST)) {
+			$nombre    = isset($_POST['nombre']) ? strip_tags($_POST['nombre']) : false;
+			$pass = isset($_POST['pass']) ? strip_tags($_POST['pass']) : false;
+			$rol    = isset($_POST['rol']) ? strip_tags($_POST['rol']) : false;
+
+			$nuevo = new Login();
+			$nuevo->setUsuario($nombre);
+			$nuevo->setPassword($pass);
+			$nuevo->setRol($rol);
+			$resultado = $nuevo->save_user();
+			
+			if ($resultado) {
+				$_SESSION['registro_user'] = 'exito';
+			}else{
+				$_SESSION['registro_user'] ='fallo';
+			}
+			header("Location:" .base_url. 'Apiario/usuarios');
+		}
+	}
+
 	#llamar a todos los apirios
 	public function apiarios()
 	{

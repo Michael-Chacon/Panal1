@@ -139,3 +139,15 @@ SELECT ap.*  FROM user_api up
 INNER JOIN  apiario ap ON up.id_apiariosU = ap.id
 INNER JOIN usuario us ON up.id_usuarioA = us.id 
 WHERE us.id = 1;
+
+#obtener todos los usurios que pertenecen a ese apiario
+SELECT us.*  FROM user_api up
+INNER JOIN  apiario ap ON up.id_apiariosU = ap.id
+INNER JOIN usuario us ON up.id_usuarioA = us.id 
+WHERE ap.id = 1;
+
+#contar el total de colmenas que tiene un apiario
+SELECT count(id) FROM  colmena WHERE id_apiarioC = 1;
+
+#sumar el toral de la mier recolectada en el apiario
+SELECT SUM(peso) AS 'total' FROM  produccion WHERE id_apiarioP = 1;

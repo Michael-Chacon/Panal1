@@ -212,9 +212,14 @@ color: #A29E9E;
 	margin-right: 5px;
 }
 
-.punto_malo{
+.muerta{
 	color: red;
 }
+
+.viva{
+	color: yellow;
+}
+
 
 /*Error 404 --------------------------------------------------------------------------*/
 
