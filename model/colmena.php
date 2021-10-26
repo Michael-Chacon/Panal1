@@ -106,7 +106,7 @@ class Colmena
 
 	#listar todas las colmenas
 	public function getAll()
-	{
+	{	
 		$apiario_id = $_SESSION['apiario_actual']->id;
 		$colmenas = $this->db->prepare("SELECT * FROM colmena WHERE id_apiarioC = :apiario_id");
 		$colmenas->bindParam(":apiario_id", $apiario_id, PDO::PARAM_INT);

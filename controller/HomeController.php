@@ -1,5 +1,8 @@
 <?php 
 require_once 'model/colmena.php';
+require_once 'model/bitacora.php';
+require_once 'model/tarea.php';
+require_once 'model/rendimiento.php';
 
 class HomeController
 {
@@ -13,6 +16,23 @@ class HomeController
 			$colmena->setId($id_colmena);
 			$datos_colmena = $colmena->obtener_colmena();
 
+			#obtener bitacora
+			$actividad =  new Bitacora();
+			$actividad->setId($id_colmena);
+			$revision = $actividad->get_revision();
+			$alimento = $actividad->get_alimentacion();
+
+			#obtener todas la tareas
+			$tareas = new Tarea();
+			$tareas->setId($id_colmena);
+			$pendientes = $tareas->get_tareas();
+
+			#datos para la grafia de rendimiento
+			$rendimiento = new Rendimiento();
+			$rendimiento->setColmena($id_colmena);
+			$grafica = $rendimiento->grafica();
+			// var_dump($grafica);
+			// exit;
 		}
 
 		

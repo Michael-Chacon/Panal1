@@ -1,9 +1,10 @@
 <?php require_once 'view/layout/menu.php'; ?>
 	<!-- -->
-	<div class="container-sm">
-		<div class="row justify-content-center">
+	
+		
+			<div class="container-sm">
 			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#newuser">
+			<button type="button" class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#newuser">
 			  Nuevo usuario
 			</button>
 
@@ -42,7 +43,6 @@
 			  </div>
 			</div>
 			<!--  -->
-			<div class="col-md-4 mt-3">
 				       <?php if(isset($_SESSION['registro_user']) && $_SESSION['registro_user'] == 'exito'): ?>
 				      	<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
 				      	<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
@@ -57,29 +57,23 @@
 							</div>
 				      <?php endif; ?>
 				      <?php Utiles::borrar_error('registro_user'); ?>
-				<table class="table">
-				  <thead>
-				    <tr>
-				      <th scope="col">Id</th>
-				      <th scope="col">Nombre</th>
-				      <th scope="col">Rol</th>
-				    </tr>
-				  </thead>
-				  <tbody>
+			<div class="row">
 				  	<?php if(isset($all_users)):
 				  		while($usuario = $all_users->fetchObject()): ?>
-				    <tr>
-				      <th scope="row"><?=$usuario->id?></th>
-				      <td>
-				      	<img src="<?=base_url?>images/404d.png" alt="" class="foto_perfil">
-				      	<?=$usuario->nombre?>
-				      </td>
-				      <td><span class="<?=$usuario->rol?>">●</span><?=$usuario->rol?></td>
-				    </tr>
+				  			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3  mb-3 bg-dark text-white perfil">
+							<div class="d-flex align-items-center shadow">
+							  <div class="flex-shrink-0">
+							    <img src="<?=base_url?>images/404d.png" alt="..." class="foto_perfil2 rounded-circle">
+							  </div>
+							  <div class="flex-grow-1 ms-2">
+							   <h5><?=$usuario->nombre?></h5>
+							   <span class="<?=$usuario->rol?>">●</span><?=$usuario->rol?>
+							  </div>
+							<span class="material-icons">more_vert</span>
+							</div>
+						</div>
+				   
 				<?php endwhile;
 				endif; ?>
-				  </tbody>
-				</table>
-			</div>
 		</div>
 	</div>	

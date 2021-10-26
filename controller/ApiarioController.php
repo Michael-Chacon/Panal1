@@ -3,6 +3,7 @@ require_once 'model/apiario.php';
 require_once 'model/usuario.php';
 require_once 'model/colmena.php';
 require_once 'model/produccion.php';
+require_once 'model/rendimiento.php';
 
 
 class ApiarioController
@@ -37,9 +38,14 @@ class ApiarioController
 		#datos para la grafica
 		$chart = $produccion->grafica();
 
+		#obtener el promedio de rendimiento por colmena
+		$promedio =  new Rendimiento();
+		$promedio_col = $promedio->rendimiento();
+
 		#llamar a la vista home
 		require_once 'view/home/home.php';
 	}
+
 
 
 	#listar todos los usuarios
@@ -48,6 +54,12 @@ class ApiarioController
 		$usuarios = new Login();
 		$all_users = $usuarios->getAll();
 		require_once 'view/usuarios/usuarios.php';
+	}
+
+	#administracion 
+	public function admin()
+	{
+		require_once 'view/admin/administracion.php';
 	}
 
 

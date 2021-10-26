@@ -1,12 +1,12 @@
 <div class="container-fluid">
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-warning mb-3 mt-2" data-bs-toggle="modal" data-bs-target="#crearApiario">
-			<span class="material-icons">emoji_nature</span>Crear Apiario
-		</button>
-		  <span class="navbar-text">
-		       <a  href="<?=base_url?>Login/logout" class="btn btn-outline-warning" type="button"><i class="material-icons">power_settings_new</i></a>
-		      </span>
-
+	<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+  	<!-- Button trigger modal -->
+    <a href="#" class="navbar-brand" data-bs-toggle="modal" data-bs-target="#crearApiario"><span class="material-icons">emoji_nature</span>Crear Apiario</a>
+      <a  href="<?=base_url?>Login/logout" class="btn btn-outline-warning" type="button"><i class="material-icons">power_settings_new</i></a>
+  </div>
+</nav>
+		
 		     	 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 				  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
 				    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
@@ -65,10 +65,10 @@
 		    </div>
 		  </div>
 		</div>
-		<div class="row">
+		<div class="row justify-content-center">
 			<?php if(isset($result)):
 			while($apiarios = $result->fetchObject()): ?>
-			<div class="col-md-4">
+			<div class="col-md-4 mb-4">
 				<div class="card shadow" >
 				  <div class="card-body">
 				    <h4 class="card-title text-center"><?=$apiarios->nombre;?></h4>

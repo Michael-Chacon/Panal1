@@ -25,16 +25,27 @@
 							    <span class="material-icons">more_vert</span>
 							  </button>
 							  <ul class="dropdown-menu" aria-labelledby="manu">
+							  	<?php if($_SESSION['user']->rol == 'Administrador'): ?>
 							    <li>
 						    	<div  type="button" class="btn btn-sm " data-bs-toggle="modal" data-bs-target="#crearcolmena">
 					    				<span class="material-icons">add</span>Nueva colmena 
 								</div>
 							    </li>
+							  <?php endif; ?>
 							    	<li><hr class="dropdown-divider"></li>
+							    	<?php if($_SESSION['user']->rol == 'Administrador' ||  $_SESSION['user']->rol == 'Trabajador'): ?>
 							    <li>
 							    	<!-- Button trigger modal -->
 									<button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#produccion">
 									 <span class="material-icons">bar_chart</span> Produccion
+									</button>
+							    </li>
+							  <?php endif; ?>
+							    <li><hr class="dropdown-divider"></li>
+							    <li>
+							    	<!-- Button trigger modal -->
+									<button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ubicacion">
+									 <span class="material-icons">place</span> Ubicación 
 									</button>
 							    </li>
 							  </ul>
@@ -42,7 +53,24 @@
 							<!-- end dropdown -->
 				    		
 				    	</div>
-
+				    	<!-- modal del mapa -->
+						<div class="modal fade " id="ubicacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog modal-fullscreen">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="text-center" id="exampleModalLabel">Ubicación del Apiario</h5>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body">
+						        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d940.4628925153306!2d-73.13691033230211!3d6.34970838898586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjAnNTkuMCJOIDczwrAwOCcxMC44Ilc!5e1!3m2!1ses!2sco!4v1627502850663!5m2!1ses!2sco" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+				    	<!-- fin del modal del mapa -->
 				    </div>
 				    <hr class="hr_perfil">
 				    <div class="row text-center">
@@ -51,7 +79,7 @@
 				    			<p class="text-perfil">Colmenas</p>
 				    		</div>
 				    		<div class="col-4">
-				    			<h4 class="cifra">30%</h4>
+				    			<h4 class="cifra">0%</h4>
 				    			<p class="text-perfil">Rendimiento</p>
 				    		</div>
 				    		<div class="col-4">
@@ -302,8 +330,41 @@
 		</div>
 	<?php endwhile;
 	endif; ?>
-		</div>			
-		</div>	
+		</div>
+		<div class="row justify-content-center" >
+			<div class="col-md-12">
+				<h2 class="text-center">Rendimiento por colmena</h2>
+				<div id="rendimiento" class="grafica_R"> 
+                  </div>
+				<script type="text/javascript">
+						am4core.useTheme(am4themes_animated);
+
+						var chart = am4core.create("rendimiento", am4charts.PieChart3D);
+
+
+						chart.legend = new am4charts.Legend();
+
+							chart.data = [
+							<?php if(isset($promedio_col)):
+							while($rendimiento = $promedio_col->fetchObject()): ?>
+							{
+							    "colmena": "<?='Colmena '.$rendimiento->colmena?>",
+							    "promedio": <?=$rendimiento->promedio?>
+							},
+							<?php endwhile;
+							endif; ?>
+								];
+
+
+						chart.innerRadius = am4core.percent(40);
+
+						var series = chart.series.push(new am4charts.PieSeries3D());
+						series.dataFields.value = "promedio";
+						series.dataFields.category = "colmena";
+				</script>
+			</div>
+		</div>
+</div>	
 		
 <!-- Modal -->
 <div class="modal fade" id="produccion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

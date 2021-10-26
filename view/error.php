@@ -7,7 +7,11 @@
 			<h1 class="text-center titulo">La página no ha sido encontrada </h1>
 			<p class="text-center"><img src="<?=base_url?>images/errorw.png" class="img-fluid" alt="..."></p>
 			<div class="d-grid gap-2">
-			  <a href="#" class="btn btn-warning btn-lg" type="button">Regresar</a>
+				<?php if(isset($_SESSION['user'])): ?>
+			  <a href="<?=base_url?>Login/apiarios" class="btn btn-warning btn-lg" type="button">Regresar</a>
+			  <?php elseif(!isset($_SESSION['user'])): ?>
+			  	<a href="<?=base_url?>" class="btn btn-warning btn-lg" type="button">Regresar</a>
+			<?php endif; ?>
 			</div>
 		</div>
 	</div>

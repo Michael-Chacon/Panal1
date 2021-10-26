@@ -10,15 +10,18 @@ body	{
 }
 
 .bien{
-	border:  2px solid #08FC04;
+	border:  3px solid #51FE00;
+	background: #51FE00;
 }
 
 .mal{
-	border:  2px solid red;
+	border:  3px solid red;
+	background: red;
 }
 
 .regular{
-	border: 2px solid orange;
+	border: 3px solid orange;
+	background: orange;
 }
 
 .numero{
@@ -67,6 +70,11 @@ body	{
 /*Grafica*/
 .grafica{
 	height: 275px;
+}
+
+.grafica_R{
+	height: 450px;
+	width: auto;
 }
 
 /*colmena*/
@@ -217,7 +225,7 @@ color: #A29E9E;
 }
 
 .viva{
-	color: yellow;
+	color: #51FE00;
 }
 
 
@@ -233,4 +241,18 @@ color: #A29E9E;
 
 .titulo{
 	margin-bottom: 20px;
+}
+
+.foto_perfil2{
+	height: 60px;
+	width: 60px;
+}
+
+.perfil{
+	margin-right: 2px;
+}
+
+.bloqueado{
+	cursor: not-allowed;
+    pointer-events: none;
 }

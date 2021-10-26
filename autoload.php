@@ -2,7 +2,9 @@
 
 	function  autoload($clase)
 	{
-		include 'controller/' . $clase . '.php';
+		if (file_exists('controller/' . $clase . '.php')) {
+			include 'controller/' . $clase . '.php';
+		}
 	}
 
 	spl_autoload_register('autoload');

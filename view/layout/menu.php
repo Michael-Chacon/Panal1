@@ -15,13 +15,24 @@
 		        <li class="nav-item">
 		          <a class="nav-link" href="almacen.html">Almacén</a>
 		        </li>
+		        <?php if($_SESSION['user']->rol == 'Administrador'): ?>
 		        <li class="nav-item">
 		          <a class="nav-link" href="<?=base_url?>Apiario/Usuarios">Usuarios</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="#">Pricing</a>
+		          <a class="nav-link" href="<?=base_url?>Apiario/admin">Configuracion</a>
+		        </li>
+		   		 <?php endif; ?>
+		        <li class="nav-item">
+		         <a  class=" nav-link position-relative">
+				  Tareas <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><?=Utiles::allTareas();?><span class="visually-hidden">Tareas</span></span>
+				</a>
 		        </li>
 		      </ul>
+		      <span class="navbar-text">
+		       <a  href="<?=base_url?>Login/apiarios" class="btn btn-outline-warning" type="button">Salir del apiairo</a>
+		      </span>
+
 		      <span class="navbar-text">
 		       <a  href="<?=base_url?>Login/logout" class="btn btn-outline-warning" type="button"><i class="material-icons">power_settings_new</i></a>
 		      </span>

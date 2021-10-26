@@ -151,3 +151,54 @@ SELECT count(id) FROM  colmena WHERE id_apiarioC = 1;
 
 #sumar el toral de la mier recolectada en el apiario
 SELECT SUM(peso) AS 'total' FROM  produccion WHERE id_apiarioP = 1;
+
+
+#seleccionar todas la tanera pendietnes con el nombre de usuario
+SELECT t.*, u.nombre FROM usuario u
+INNER JOIN tearea t ON t.id_user = u.id 
+WHERE t.id_colmenaT = 1 AND t.estado = 'pendiente';
+
+#obtener bitacora con nombre de usuario y fecha
+SELECT b.*, u.nombre FROM usuario u
+INNER JOIN bitacora b ON b.id_user = u.id 
+WHERE b.id_colmenaB = colmena AND actividad = :alimenta;
+
+
+#seleccionar el numero de tareas sin finalizar por cada apiario
+SELECT COUNT(t.id) FROM  tearea t 
+INNER JOIN colmena c ON c.id = t.id_colmenaT
+INNER JOIN  apiario a ON a.id = c.id_apiarioC
+WHERE a.id = 1 AND t.estado = 'pendiente';
+
+
+#seleccionar los apiarios y las colmenas que tiene cada uno
+SELECT ap.*, COUNT(c.id) AS colmenas  FROM user_api up
+INNER JOIN  apiario ap ON up.id_apiariosU = ap.id
+INNER JOIN usuario us ON up.id_usuarioA = us.id 
+INNER JOIN colmena c ON ap.id = c.id_apiarioC 
+WHERE us.id = 1 GROUP BY c.id_apiarioC;
+
+#seleccionar el promedio general del rendimiento de cada colmena 
+SELECT AVG(r.calificacion) AS 'promedio', c.numero FROM rendimiento r
+
+
+
+#crear la tabla de  permisos 
+CREATE TABLE permisos(
+   id int(4) AUTO_INCREMENT NOT NULL,
+   nombre varchar(30) not null,
+   estado int(1) not null,
+   CONSTRAINT pk_permisos PRIMARY KEY(id)
+)ENGINE=InnoDB;
+
+#tabla de usuarios y permisos
+CREATE TABLE user_permisos(
+  id_user int(4) not null,
+  id_permisos int(1) not null, 
+  CONSTRAINT fk_user_p FOREIGN KEY id_user REFERENCES usuario(id), 
+  CONSTRAINT fk_permisos_u FOREIGN KEY id_permisos REFERENCES permisos(id)
+)ENGINE=InnoDB;
+
+
+
+
